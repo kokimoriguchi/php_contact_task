@@ -19,8 +19,26 @@
       </div>
       <!-- text -->
 
+      <!-- alert -->
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+          <!-- @include('Common.error_alert', ['message' => $error]) -->
+          <div
+            class="mx-auto max-w-screen-md bg-red-400 border border-red-400 text-red-700 px-4 py-3 rounded"
+            role="alert">
+            <strong class="font-bold">ERROR!!</strong><br />
+            <span class="block sm:inline">{{ $error }}</span>
+          </div>
+        @endforeach
+      @endif
+
       <!-- form -->
-      <form class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+      <form
+        class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2"
+        action="{{ url('/contact') }}"
+        method="post"
+      >
+        @csrf
         <div class="sm:col-span-2">
           <label
             for="contact_name"
@@ -49,52 +67,53 @@
 
         <div class="sm:col-span-2">
           <label
-            for="email"
+            for="contact_email"
             class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
           >
             メールアドレス
           </label>
           <input
-            name="email"
+            name="contact_email"
+            type="email"
             class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
           />
         </div>
 
         <div class="sm:col-span-2">
           <label
-            for="tel_number"
+            for="contact_tel_number"
             class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
           >
             電話番号
           </label>
           <input
-            name="tel_number"
+            name="contact_tel_number"
             class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
           />
         </div>
 
         <div class="sm:col-span-2">
           <label
-            for="address_number"
+            for="contact_address_number"
             class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
           >
             郵便番号
           </label>
           <input
-            name="address_number"
+            name="contact_address_number"
             class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
           />
         </div>
 
         <div class="sm:col-span-2">
           <label
-            for="prefecture"
+            for="contact_prefecture"
             class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
           >
             都道府県
           </label>
           <select
-            name="prefecture"
+            name="contact_prefecture"
             class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
           >
             <option disabled selected>選択してください</option>
@@ -106,39 +125,39 @@
 
         <div class="sm:col-span-2">
           <label
-            for="city_name"
+            for="contact_city_name"
             class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
           >
             市区町村
           </label>
           <input
-            name="city_name"
+            name="contact_city_name"
             class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
           />
         </div>
 
         <div class="sm:col-span-2">
           <label
-            for="street_name"
+            for="contact_street_name"
             class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
           >
             番地・マンション名
           </label>
           <input
-            name="street_name"
+            name="contact_street_name"
             class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
           />
         </div>
 
         <div class="sm:col-span-2">
           <label
-            for="message"
+            for="contact_message"
             class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
           >
             お問い合わせ内容
           </label>
           <textarea
-            name="message"
+            name="contact_message"
             class="h-64 w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
           ></textarea>
         </div>
@@ -146,8 +165,9 @@
         <div class="flex items-center justify-between sm:col-span-2">
           <button
             class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"
+            type="submit"
           >
-            Send
+            送信
           </button>
         </div>
       </form>

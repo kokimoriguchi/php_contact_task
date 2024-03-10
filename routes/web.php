@@ -7,3 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/contact', 'App\Http\Controllers\contacts\Contacts@index');
+Route::post('/contact', 'App\Http\Controllers\contacts\Contacts@post');
