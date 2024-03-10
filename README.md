@@ -4,11 +4,15 @@
 3. docker compose up -dで起動
 4. localhost8080番ポートで起動確認
 5. docker exec -it php_contact_task-laravel.test-1 sh でlaravelコンテナに入る
-6. npm install -D tailwindcss postcss autoprefixer tailwindに必要なパッケージのインストール
-7. npx tailwindcss init -p でtailwindの設定ファイルの作成
+6. npm run buildでtailwind適用するようにする
+7. php artisan migrateでmigrationを通しテーブルの作成(都道府県テーブルはSQLをテーブルプラスに直接記述して追加しているので別途必要)
+8. php artisan make:model Prefecturesで都道府県のモデル作成
 
 ## tailwind導入参考記事
 [tailwind参考記事](https://tech-blog.rakus.co.jp/entry/20230427/frontend)
+1. docker exec -it php_contact_task-laravel.test-1 sh でlaravelコンテナに入る
+2. npm install -D tailwindcss postcss autoprefixer tailwindに必要なパッケージのインストール
+3. npx tailwindcss init -p でtailwindの設定ファイルの作成
 
 ## ログの出力
 - docker logs -f php_contact_task-laravel.test-1

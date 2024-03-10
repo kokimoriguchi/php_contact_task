@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>App name - @yield('title')</title>
   @vite('resources/css/app.css')
 </head>
 <body>
-  <p class='text-red-300'>Contact us</p>
+  @yield('content')
 </body>
 </html>

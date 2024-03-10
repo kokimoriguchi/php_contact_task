@@ -1,18 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\contacts\Contacts;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// 第一引数にはURL、第二引数にはコントローラーのフルパスとクラス名＠メソッド名で指定
 Route::get('/', function () {
-    return view('contact');
+    return view('welcome');
 });
+Route::get('/contact', 'App\Http\Controllers\contacts\Contacts@index');
