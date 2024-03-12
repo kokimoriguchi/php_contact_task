@@ -9,7 +9,7 @@ class ContactValidates
     // validateメソッドは$requestの中身を検証するIlluminate\Http\Requestクラスのメソッド
     $validate_data = $request->validate([
       'contact_name' => 'required',
-      'contact_company' => 'required',
+      'contact_sex' => 'required',
       'contact_email' => 'required|email',
       'contact_tel_number' => 'required|integer',
       'contact_address_number' => 'required',
@@ -20,7 +20,7 @@ class ContactValidates
     ],
     [
       'contact_name.required' => '名前を入力してください',
-      'contact_company.required' => '会社名を入力してください',
+      'contact_sex.required' => '性別を選択してください',
       'contact_email.required' => 'メールアドレスを入力してください',
       'contact_email.email' => 'メールアドレスの形式で入力してください',
       'contact_tel_number.required' => '電話番号を入力してください',

@@ -1,10 +1,10 @@
-@extends('layouts.app')
+<x-layouts.app>
 
-@section('title')
-  Contact
-@endsection
-
-@section('content')
+  <!-- title -->
+  <x-slot name="title">
+    お問い合わせ
+  </x-slot>
+  <!-- content -->
   <div class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
       <!-- text -->
@@ -17,150 +17,28 @@
           PHP Framework Laravel 8 によるお問い合わせフォームの実装
         </p>
       </div>
-      <!-- text -->
 
       <!-- alert -->
-      @if ($errors->any())
-        @foreach ($errors->all() as $error)
-          <!-- @include('Common.error_alert', ['message' => $error]) -->
-          <div
-            class="mx-auto max-w-screen-md bg-red-400 border border-red-400 text-red-700 px-4 py-3 rounded"
-            role="alert">
-            <strong class="font-bold">ERROR!!</strong><br />
-            <span class="block sm:inline">{{ $error }}</span>
-          </div>
-        @endforeach
+      @if ($errors -> any())
+        <div class="mx-auto max-w-screen-md items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50">
+          <p>入力エラーがあります</p>
+        </div>
       @endif
 
       <!-- form -->
       <form
-        class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2"
+        class="h-adr mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2"
         action="{{ url('/contact') }}"
         method="post"
       >
+        <span class="p-country-name" style="display:none;">Japan</span>
         @csrf
-        <div class="sm:col-span-2">
-          <label
-            for="contact_name"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            お名前
-          </label>
-          <input
-            name="contact_name"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_company"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            会社名
-          </label>
-          <input
-            name="contact_company"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_email"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            メールアドレス
-          </label>
-          <input
-            name="contact_email"
-            type="email"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_tel_number"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            電話番号
-          </label>
-          <input
-            name="contact_tel_number"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_address_number"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            郵便番号
-          </label>
-          <input
-            name="contact_address_number"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_prefecture"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            都道府県
-          </label>
-          <select
-            name="contact_prefecture"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          >
-            <option disabled selected>選択してください</option>
-            @foreach ($prefectures_data as $prefecture)
-              <option value="{{ $prefecture->id }}">{{ $prefecture->pref_name }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_city_name"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            市区町村
-          </label>
-          <input
-            name="contact_city_name"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_street_name"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            番地・マンション名
-          </label>
-          <input
-            name="contact_street_name"
-            class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label
-            for="contact_message"
-            class="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-          >
-            お問い合わせ内容
-          </label>
-          <textarea
-            name="contact_message"
-            class="h-64 w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          ></textarea>
-        </div>
+        @foreach ($form_content_data as $key => $form_data)
+          <x-common.edit_box :name="$form_data['name']" :label="$form_data['label']" :type="$form_data['type']" :data="$form_data['data']"/>
+          @if ($errors->has($form_data['name']))
+            <x-common.error_alert :message="$errors->first($form_data['name'])" />
+          @endif
+        @endforeach
 
         <div class="flex items-center justify-between sm:col-span-2">
           <button
@@ -170,8 +48,9 @@
             送信
           </button>
         </div>
+
       </form>
-      <!-- form -->
+
     </div>
   </div>
-@endsection
+</x-layouts.app>
