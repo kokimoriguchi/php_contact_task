@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Services\ContactServices\ContactServices;
 use App\Validates\Forms\ContactValidates;
 use Illuminate\Http\Request;
-use App\Consts\ContactConsts;
 
 // 下記の以降記述が各class
 class Contacts extends Controller
@@ -30,8 +29,7 @@ class Contacts extends Controller
     $this->form_content_data = $this->contact_services->index();
     // ローカル変数にクラス変数を代入しcompactでviewに渡す
     $form_content_data = $this->form_content_data;
-    // sessionにdataがあればsession_contact_dataに代入し、なければ空配列を代入してviewに渡す
-    dump($form_content_data);
+    // sessionにdataがあれば、form_content_dataのvalueに代入
     if (session('contact_data')) {
       $session_data = session('contact_data');
       foreach ($session_data as $key => $value) {
@@ -42,7 +40,6 @@ class Contacts extends Controller
         }
       }
     }
-    dump($form_content_data);
     // compactで変数をまとめてviewに渡すことができる
     return view('contacts/contact_index', compact('form_content_data'));
   }
@@ -51,12 +48,11 @@ class Contacts extends Controller
   {
     session()->flush();
     $request_data = $request->all();
-    dump($request_data);
     // リクエストデータをcontact_dataをキーにしてセッションに格納
     session()->put('contact_data', $request_data);
     $session_data = session()->all();
-    dump($session_data);
-    // $validate_data = $this->contact_validates->validate($request);
+    $this->contact_services->send_mail();
+    $validate_data = $this->contact_validates->validate($request);
     // dump($validate_data);
   }
 }

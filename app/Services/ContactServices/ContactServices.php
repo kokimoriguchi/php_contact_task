@@ -5,6 +5,7 @@ namespace App\Services\ContactServices;
 // 下記記述がpythonでのimportとfromの記述に相当
 use App\Models\ContactModels\ContactModels;
 use App\Consts\ContactContents;
+use Illuminate\Support\Facades\Mail;
 
 class ContactServices
 {
@@ -46,6 +47,16 @@ class ContactServices
       }
     }
     return $form_content_data;
+  }
+
+  public function send_mail()
+  {
+    $data = [];
+
+    Mail::send('emails.welcome', $data, function($message){
+        $message->to('abc987@example.com', 'Test')
+        ->subject('This is a test mail');
+    });
   }
 }
 ?>
