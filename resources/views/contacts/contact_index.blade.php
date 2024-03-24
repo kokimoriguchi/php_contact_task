@@ -34,7 +34,13 @@
         <span class="p-country-name" style="display:none;">Japan</span>
         @csrf
         @foreach ($form_content_data as $key => $form_data)
-          <x-common.edit_box :name="$form_data['name']" :label="$form_data['label']" :type="$form_data['type']" :data="$form_data['data']"/>
+          <x-common.edit_box
+            :name="$form_data['name']"
+            :label="$form_data['label']"
+            :type="$form_data['type']"
+            :data="$form_data['data']"
+            :value="isset($form_data['value']) ? $form_data['value'] : ''"
+          />
           @if ($errors->has($form_data['name']))
             <x-common.error_alert :message="$errors->first($form_data['name'])" />
           @endif
