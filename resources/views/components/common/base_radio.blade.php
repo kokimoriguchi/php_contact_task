@@ -15,9 +15,9 @@
           <input
             id="{{ $key }}"
             type="radio"
-            value="{{ $key }}"
+            value="{{ $optionValue }}"
             name="{{ $name }}"
-            {{ $value == $key ? 'checked' : '' }}
+            {{ $value == $optionValue ? 'checked' : '' }}
             class="h-4 w-8 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
           >
           <label

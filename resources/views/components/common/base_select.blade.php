@@ -11,7 +11,7 @@
   >
     <option disabled selected>選択してください</option>
     @foreach ($data as $key => $optionValue)
-      <option value="{{ $key }}" {{ $key == $value ? 'selected' : '' }}>{{ $optionValue }}</option>
+      <option value="{{ $optionValue }}" {{ $optionValue == $value ? 'selected' : '' }}>{{ $optionValue }}</option>
     @endforeach
   </select>
 </div>

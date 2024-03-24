@@ -49,13 +49,19 @@ class ContactServices
     return $form_content_data;
   }
 
-  public function send_mail()
+  // メール送信メソッド
+  public function send_mail($request_data, $to_user, $to_address)
   {
-    $data = [];
-
-    Mail::send('emails.welcome', $data, function($message){
-        $message->to('abc987@example.com', 'Test')
-        ->subject('This is a test mail');
+    if ($to_user) {
+      $mail_title = '[サンプルサイト]お問合せありがとうございます';
+    } else {
+      $mail_title = '[サンプルサイト]お問合せがありました';
+    }
+    $request_data['to_user'] = $to_user;
+    //useキーワードを使用することで関数内で外部変数を使用できるようになる
+    Mail::send('emails.contact_email', ['request_data' => $request_data], function($message) use ($to_address, $request_data, $mail_title) {
+        $message->to($to_address, $request_data['contact_name'])
+        ->subject($mail_title);
     });
   }
 }
