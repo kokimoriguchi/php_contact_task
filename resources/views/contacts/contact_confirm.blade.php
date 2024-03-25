@@ -11,6 +11,14 @@
         </h2>
       </div>
 
+      <!-- alert -->
+      @if (session('errors'))
+        <div class="flex justify-center">
+          <x-common.error_alert :message="session('errors')" />
+        </div>
+      @endif
+
+
       <div class="mx-auto max-w-screen-md">
         @foreach ($request_data as $key => $value)
         <div class="sm:col-span-2">
@@ -30,10 +38,10 @@
         </div>
         @endforeach
 
-        <div class="flex justify-between mt-40">
+        <div class="flex justify-between mt-10">
           <div>
             <a
-              class="inline-block rounded-lg border-2 border-black bg-gray-500 px-8 py-3 text-center text-sm font-semibold text-black outline-none ring-gray-300 transition duration-100 hover:bg-gray-900 focus-visible:ring active:bg-gray-700 md:text-base"
+              class="inline-block rounded-lg bg-gray-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-600 focus-visible:ring active:bg-gray-700 md:text-base"
               href="{{ url('/contact') }}"
             >
               戻る

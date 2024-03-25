@@ -87,8 +87,8 @@ class Contacts extends Controller
       session()->forget('contact_data');
       return redirect('/contact/complete');
     } catch (\Exception $e) {
-      $error = 'メール送信に失敗しました';
-      return redirect('/contact/confirm', compact('error'));
+      $errors = '予期せぬエラーが発生しました。お手数ですが、時間をおいて再度お試しください。';
+      return redirect('/contact/confirm')->with('errors', $errors);
     }
   }
 

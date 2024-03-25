@@ -20,13 +20,14 @@
 
       <!-- alert -->
       @if ($errors -> any())
-        <div class="mx-auto max-w-screen-md items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50">
-          <p>入力エラーがあります</p>
+        <div class="flex justify-center">
+          <x-common.error_alert message="入力エラーがあります" />
         </div>
       @endif
 
       <!-- form -->
       <form
+        id="contact_form"
         class="h-adr mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2"
         action="{{ url('/contact') }}"
         method="post"
@@ -45,18 +46,20 @@
             <x-common.error_alert :message="$errors->first($form_data['name'])" />
           @endif
         @endforeach
-
-        <div class="flex items-center justify-between sm:col-span-2">
-          <button
-            class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"
-            type="submit"
-          >
-            確認画面へ
-          </button>
-        </div>
-
       </form>
 
+      <div class="items-center flex justify-between max-w-screen-md mx-auto">
+        <a href="/" class="inline-block rounded-lg bg-gray-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-600 focus-visible:ring active:bg-gray-700 md:text-base">
+          戻る
+        </a>
+        <button
+          class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"
+          type="submit"
+          form="contact_form"
+        >
+          確認画面へ
+        </button>
+      </div>
     </div>
   </div>
 </x-layouts.app>
