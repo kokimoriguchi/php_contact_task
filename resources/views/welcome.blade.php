@@ -1,9 +1,7 @@
-@extends('layouts.app')
+<x-layouts.app>
+  <x-slot name="title">
+    Contact
+  </x-slot>
 
-@section('title')
-  Contact
-@endsection
-
-@section('content')
-<h1>Welcome to Laravel 8</h1>
-@endsection
+  <h1>Contact</h1>
+</x-layouts.app>
